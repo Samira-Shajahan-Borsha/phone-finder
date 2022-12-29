@@ -14,13 +14,19 @@
 
 </head>
 
-<body class="container">
+<body class="container bg-body-tertiary">
     <h2 class="text-center text-info mt-3">Search smart phone here</h2>
 
     <!-- search area -->
     <div class="input-group my-3 w-75 mx-auto">
-        <input id="search-field" type="text" class="form-control" placeholder="Search" aria-label="" aria-describedby="button-addon2">
+        <input id="search-field" type="text" class="form-control" placeholder="Search" aria-label=""
+            aria-describedby="button-addon2">
         <button onclick="searchPhone()" class="btn btn-outline-info" type="button" id="search-btn">Search</button>
+    </div>
+
+    <!-- display searched phone -->
+    <div id="phone-container" class="row row-cols-1 row-cols-md-3 g-4 my-4">
+       
     </div>
 
     <!-- bootstrap js link -->
