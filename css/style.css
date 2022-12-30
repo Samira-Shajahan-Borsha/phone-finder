@@ -10,6 +10,10 @@ body {
     font-weight: 500;
 }
 
+#search-btn:hover{
+    color: white;
+}
+
 #search-field {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
