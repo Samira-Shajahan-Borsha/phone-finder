@@ -31,3 +31,7 @@ body {
 #show-all-btn {
     display: none;
 }
+
+#not-found{
+    display: none;
+}

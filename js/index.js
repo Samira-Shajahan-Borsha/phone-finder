@@ -1,11 +1,21 @@
-document.getElementById('error-message').style.display = 'none';
+//element display style
+const elementDisplayStyle = (id, displayStyle) => {
+    document.getElementById(id).style.display = displayStyle;
+}
+elementDisplayStyle('error-message', 'none');
+
+// all phone container
+const phoneContainer = document.getElementById('phone-container');
+
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchFieldText = searchField.value;
 
+    phoneContainer.textContent = '';
+
     if (searchFieldText == '') {
-        document.getElementById('error-message').style.display = 'block';
-        document.getElementById('show-all-btn').style.display = 'none';
+        elementDisplayStyle('error-message', 'block');
+        elementDisplayStyle('show-all-btn', 'none');
     }
     else {
         //load data
@@ -13,16 +23,27 @@ const searchPhone = () => {
 
         fetch(url)
             .then(res => res.json())
-            .then(data => displaySearchPhone(data.data));
+            .then(data => {
+                // console.log(data);
+                if (data.data.length == 0) {
+                    elementDisplayStyle('not-found', 'block');
+                    elementDisplayStyle('error-message', 'none');
+                    phoneContainer.textContent = '';
+                }
+                else {
 
-            document.getElementById('error-message').style.display = 'none';
+                    displaySearchPhone(data.data);
+                    elementDisplayStyle('not-found', 'none');
+
+                }
+            });
+        elementDisplayStyle('error-message', 'none');
         searchField.value = '';
     }
 }
 
 const displaySearchPhone = phones => {
 
-    const phoneContainer = document.getElementById('phone-container');
     phoneContainer.textContent = '';
 
     const phoneDetailContainer = document.getElementById('phone-detail-container');
@@ -54,7 +75,6 @@ const displaySearchPhone = phones => {
         document.getElementById('show-all-btn').style.display = 'block';
 
         document.getElementById('show-all-btn').addEventListener('click', function () {
-            const phoneContainer = document.getElementById('phone-container');
             restPhones.forEach(phone => {
                 const div = document.createElement('div');
                 div.classList.add('col');
