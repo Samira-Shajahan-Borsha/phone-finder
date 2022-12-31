@@ -10,7 +10,7 @@ body {
     font-weight: 500;
 }
 
-#search-btn:hover{
+#search-btn:hover {
     color: white;
 }
 
@@ -19,6 +19,10 @@ body {
     font-weight: 400;
 }
 
-.card{
+.card {
     border: none;
+}
+
+#show-all-btn {
+    display: none;
 }

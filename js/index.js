@@ -1,7 +1,6 @@
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchFieldText = searchField.value;
-    // console.log(searchFieldText);
 
     //load data
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchFieldText}`;
@@ -14,16 +13,17 @@ const searchPhone = () => {
 }
 
 const displaySearchPhone = phones => {
-    // console.log(phones);
+
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.textContent = '';
+
     const phoneDetailContainer = document.getElementById('phone-detail-container');
     phoneDetailContainer.textContent = '';
-    const first20phones = phones.slice(0, 20);
-    // console.log(first20phones);
 
+    const first20phones = phones.slice(0, 20);
+
+    //show first 20 phones
     first20phones.forEach(phone => {
-        // console.log(phone.slug);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
@@ -34,38 +34,56 @@ const displaySearchPhone = phones => {
                     <p class="card-text">${phone.brand}</p>
                     <button onclick="loadPhoneDetail('${phone.slug}')" type="button" class="btn btn-outline-dark">Explore</button>
                 </div>
-            </div>
+            </div>      
         `;
         phoneContainer.appendChild(div);
     });
 
+    //show all phones
     if (phones.length > 20) {
-        // console.log(phones);
         const restPhones = phones.slice(20);
-        console.log(restPhones);
-        restPhones.forEach(phone => {
-            console.log(phone);
 
+        document.getElementById('show-all-btn').style.display = 'block';
+        
+        document.getElementById('show-all-btn').addEventListener('click', function () {
+            console.log('HI');
+            const phoneContainer = document.getElementById('phone-container');
+            restPhones.forEach(phone => {
+                const div = document.createElement('div');
+                div.classList.add('col');
+                div.innerHTML = `
+                    <div class="card h-100 align-items-center py-3 shadow-sm">
+                        <img src="${phone.image}" class="card-img-top" style="width: 180px" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${phone.phone_name}</h5>
+                            <p class="card-text">${phone.brand}</p>
+                            <button onclick="loadPhoneDetail('${phone.slug}')" type="button" class="btn btn-outline-dark">Explore</button>
+                        </div>
+                    </div>      
+                `;
+                phoneContainer.appendChild(div);
+                document.getElementById('show-all-btn').style.display = 'none';
+            });
         });
-        // const div = document.getElementById('div');
-
     }
 }
 
 const loadPhoneDetail = phoneId => {
-    console.log(phoneId);
+    //fetched phone detail api
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
-    console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhoneDetail(data.data));
 }
 
+//show phone details
 const displayPhoneDetail = phone => {
-    console.log(phone);
+
     const phoneDetailContainer = document.getElementById('phone-detail-container');
     phoneDetailContainer.textContent = '';
+
     const sensors = phone.mainFeatures.sensors;
+
     const div = document.createElement('div');
     div.className = "card py-3 px-2";
     div.setAttribute('style', 'width: 400px');
