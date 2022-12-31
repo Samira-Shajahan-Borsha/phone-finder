@@ -19,6 +19,11 @@ body {
     font-weight: 400;
 }
 
+/* error message style */
+#error-message{
+    display: none;
+}
+
 .card {
     border: none;
 }

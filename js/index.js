@@ -1,15 +1,23 @@
+document.getElementById('error-message').style.display = 'none';
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchFieldText = searchField.value;
 
-    //load data
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchFieldText}`;
+    if (searchFieldText == '') {
+        document.getElementById('error-message').style.display = 'block';
+        document.getElementById('show-all-btn').style.display = 'none';
+    }
+    else {
+        //load data
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchFieldText}`;
 
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displaySearchPhone(data.data));
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displaySearchPhone(data.data));
 
-    searchField.value = '';
+            document.getElementById('error-message').style.display = 'none';
+        searchField.value = '';
+    }
 }
 
 const displaySearchPhone = phones => {
@@ -44,9 +52,8 @@ const displaySearchPhone = phones => {
         const restPhones = phones.slice(20);
 
         document.getElementById('show-all-btn').style.display = 'block';
-        
+
         document.getElementById('show-all-btn').addEventListener('click', function () {
-            console.log('HI');
             const phoneContainer = document.getElementById('phone-container');
             restPhones.forEach(phone => {
                 const div = document.createElement('div');
