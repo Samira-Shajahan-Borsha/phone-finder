@@ -21,14 +21,23 @@
     <div class="input-group my-3 w-75 mx-auto">
         <input id="search-field" type="text" class="form-control" placeholder="Search" aria-label=""
             aria-describedby="button-addon2">
-        <button onclick="searchPhone()" class="btn btn-outline-info" type="button" id="search-btn">Search</button>    
+        <button onclick="searchPhone()" class="btn btn-outline-info" type="button" id="search-btn">Search</button>
     </div>
-    <div>
-        <p  id="not-found" class="text-center text-danger">No search result found</p>
+
+    <!-- spinner -->
+    <div class="d-flex align-items-center w-50 mx-auto">
+        <strong id="spinner-1">Loading...</strong>
+        <div id="spinner-2" class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
     </div>
 
     <!-- error-message -->
+    <div>
+        <p id="not-found" class="text-center text-danger">No search result found</p>
+    </div> 
+    
     <p id="error-message" class="text-danger text-center">Please write something to display</p>
+
+
 
     <!-- display phone details -->
     <div id="phone-detail-container" class="d-flex flex-column align-items-center">

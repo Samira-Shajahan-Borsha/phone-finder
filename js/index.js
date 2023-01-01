@@ -23,6 +23,9 @@ const searchPhone = () => {
         elementDisplayStyle('not-found', 'none');
     }
     else {
+        elementDisplayStyle('spinner-1', 'block');
+        elementDisplayStyle('spinner-2', 'block');
+
         //load data
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchFieldText}`;
 
@@ -33,11 +36,15 @@ const searchPhone = () => {
                 if (data.data.length == 0) {
                     elementDisplayStyle('not-found', 'block');
                     elementDisplayStyle('error-message', 'none');
+                    elementDisplayStyle('spinner-1', 'none');
+                    elementDisplayStyle('spinner-2', 'none');
                     phoneContainer.textContent = '';
                 }
                 else {
                     displaySearchPhone(data.data);
                     elementDisplayStyle('not-found', 'none');
+                    elementDisplayStyle('spinner-1', 'none');
+                    elementDisplayStyle('spinner-2', 'none');
                 }
             });
         elementDisplayStyle('error-message', 'none');
@@ -107,7 +114,7 @@ const loadPhoneDetail = phoneId => {
 
 //show phone details
 const displayPhoneDetail = phone => {
-    
+
     phoneDetailContainer.textContent = '';
 
     const sensors = phone.mainFeatures.sensors;

@@ -23,6 +23,10 @@ body {
 #error-message{
     display: none;
 }
+#not-found{
+    display: none;
+}
+
 
 .card {
     border: none;
@@ -32,6 +36,8 @@ body {
     display: none;
 }
 
-#not-found{
+/* spinner style */
+#spinner-1, #spinner-2{
     display: none;
 }
+
