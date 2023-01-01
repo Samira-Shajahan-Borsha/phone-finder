@@ -2,20 +2,25 @@
 const elementDisplayStyle = (id, displayStyle) => {
     document.getElementById(id).style.display = displayStyle;
 }
+
 elementDisplayStyle('error-message', 'none');
 
-// all phone container
+// all containers
 const phoneContainer = document.getElementById('phone-container');
+
+const phoneDetailContainer = document.getElementById('phone-detail-container');
 
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchFieldText = searchField.value;
 
     phoneContainer.textContent = '';
+    phoneDetailContainer.textContent = '';
 
     if (searchFieldText == '') {
         elementDisplayStyle('error-message', 'block');
         elementDisplayStyle('show-all-btn', 'none');
+        elementDisplayStyle('not-found', 'none');
     }
     else {
         //load data
@@ -31,10 +36,8 @@ const searchPhone = () => {
                     phoneContainer.textContent = '';
                 }
                 else {
-
                     displaySearchPhone(data.data);
                     elementDisplayStyle('not-found', 'none');
-
                 }
             });
         elementDisplayStyle('error-message', 'none');
@@ -46,7 +49,6 @@ const displaySearchPhone = phones => {
 
     phoneContainer.textContent = '';
 
-    const phoneDetailContainer = document.getElementById('phone-detail-container');
     phoneDetailContainer.textContent = '';
 
     const first20phones = phones.slice(0, 20);
@@ -72,7 +74,7 @@ const displaySearchPhone = phones => {
     if (phones.length > 20) {
         const restPhones = phones.slice(20);
 
-        document.getElementById('show-all-btn').style.display = 'block';
+        elementDisplayStyle('show-all-btn', 'block');
 
         document.getElementById('show-all-btn').addEventListener('click', function () {
             restPhones.forEach(phone => {
@@ -89,7 +91,7 @@ const displaySearchPhone = phones => {
                     </div>      
                 `;
                 phoneContainer.appendChild(div);
-                document.getElementById('show-all-btn').style.display = 'none';
+                elementDisplayStyle('show-all-btn', 'none');
             });
         });
     }
@@ -105,8 +107,7 @@ const loadPhoneDetail = phoneId => {
 
 //show phone details
 const displayPhoneDetail = phone => {
-
-    const phoneDetailContainer = document.getElementById('phone-detail-container');
+    
     phoneDetailContainer.textContent = '';
 
     const sensors = phone.mainFeatures.sensors;
